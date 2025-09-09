@@ -2457,11 +2457,31 @@ const section = document.querySelector("section");
 const iconColorSelect = document.getElementById("iconColorSelect");
 const sizeSlider = document.getElementById("sizeSlider");
 
+// Ensure slider max is reasonable for viewport and frame
+function updateSliderMax() {
+  const MIN_SIZE = 24;
+  const fallbackFrame = 120;
+  const frameEl = document.querySelector('.icon-frame');
+  const frameHeight = frameEl ? parseInt(getComputedStyle(frameEl).height, 10) || fallbackFrame : fallbackFrame;
+  // Allow icons up to ~1.6x frame height but never larger than 60% of viewport height nor 220px
+  const maxByFrame = Math.floor(frameHeight * 1.6);
+  const maxByViewport = Math.floor(window.innerHeight * 0.6);
+  const globalMax = Math.min(maxByFrame, maxByViewport, 220);
+  sizeSlider.max = Math.max(globalMax, MIN_SIZE);
+  // clamp current value
+  if (parseInt(sizeSlider.value, 10) > sizeSlider.max) sizeSlider.value = sizeSlider.max;
+}
+
+window.addEventListener('resize', updateSliderMax);
+updateSliderMax();
+
 // Render icons
 function renderIcons() {
   section.innerHTML = "";
   const MIN_SIZE = 24;
-  const requested = Math.max(MIN_SIZE, parseInt(sizeSlider.value, 10) || MIN_SIZE);
+  const MAX_SIZE = parseInt(sizeSlider.max, 10) || 220;
+  let requested = parseInt(sizeSlider.value, 10) || MIN_SIZE;
+  requested = Math.max(MIN_SIZE, Math.min(requested, MAX_SIZE));
 
   i_list.forEach((iconName) => {
     const card = document.createElement("div");
