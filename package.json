@@ -8,7 +8,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "http-server -p 3000"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,8 @@
   "license": "MIT",
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }
