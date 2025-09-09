@@ -285,8 +285,11 @@ void main(){
       const { clientWidth: w, clientHeight: h } = mount;
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
       renderer.setPixelRatio(pixelRatio);
-      renderer.setSize(w, h, false);
-      uniforms.iResolution.value.set(w * pixelRatio, h * pixelRatio, pixelRatio);
+      // Ensure canvas width/height attributes and style are consistent to avoid huge computed heights
+      renderer.setSize(w, h, true);
+      renderer.domElement.style.width = w + 'px';
+      renderer.domElement.style.height = h + 'px';
+      uniforms.iResolution.value.set(Math.max(1, Math.floor(w * pixelRatio)), Math.max(1, Math.floor(h * pixelRatio)), pixelRatio);
     };
 
     setSize();
