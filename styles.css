@@ -160,12 +160,12 @@ section {
   background: transparent; /* preserve page background so icons keep neumorphic look */
   border-radius: 8px;
   border: 1px solid rgba(0,0,0,0.03);
-  min-height: 170px; /* ensures room for icon + label + button */
+  min-height: 190px; /* ensures room for icon + label + button */
   justify-content: space-between;
 }
 .icon-frame {
   width: 100%;
-  height: 100px;
+  height: 120px; /* increased to avoid clipping of tall glyphs */
   display: flex;
   align-items: center;
   justify-content: center;
