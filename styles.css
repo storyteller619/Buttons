@@ -91,25 +91,42 @@ section {
 /* Demo site layout */
 .site-header {
   text-align: center;
-  padding: 2rem 1rem 0.5rem;
+  padding: 1.5rem 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 .site-title {
   color: #b2f9ff;
   filter: drop-shadow(3px 3px 2px #a3b1c6) drop-shadow(-3px -3px 2px #ffffff);
   margin: 0;
-  font-size: 3.5rem;
+  font-size: 2.4rem;
 }
 .subtitle {
   color: #556;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 .main-content {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 2rem;
   align-items: start;
-  padding: 2rem;
+  padding: 1.5rem;
 }
+.install-panel {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.install-block, .usage-block {
+  background: #f7fbfd;
+  border-radius: 10px;
+  padding: 0.65rem;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.03);
+}
+.install-title { font-weight: 700; margin-bottom: 0.5rem; }
+.install-sub { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
 .controls-panel {
   background: #e0e5ec;
   border-radius: 12px;
