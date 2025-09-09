@@ -133,21 +133,15 @@ section {
 .laser-root canvas { display: block; width: 100% !important; height: 100% !important; }
 .hero-overlay { position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index: 2; }
 .overlay-box { width: min(1100px, 92%); max-height: 84%; pointer-events:auto; background: transparent; border-radius: 16px; padding: 1rem; box-sizing: border-box; z-index: 3; }
-.overlay-header { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:0.5rem; }
+.overlay-header { display:flex; flex-direction:column; align-items:center; gap:0.5rem; margin-bottom:0.5rem; text-align:center; }
 .overlay-controls { display:flex; gap:0.5rem; align-items:center; }
 .open-usage { padding:0.4rem 0.6rem; border-radius:8px; border:none; background:#ff8c1a; color:#fff; cursor:pointer; }
 .overlay-body { overflow:auto; max-height: calc(100% - 80px); padding:0.5rem; }
 .overlay-footer { margin-top:0.5rem; text-align:right; color:#eee; }
 
 /* ensure header sits under hero unless explicitly above */
-.site-header { position: relative; z-index: 1; /* sit under the laser hero */
-  /* pull header up into hero area so laser appears to lance the top */
-  margin-top: -96px;
-  padding-top: 56px; /* preserve internal spacing */
-}
 
 /* push main content down so it doesn't hide under the pulled-up header */
-.main-content { margin-top: 96px; }
 
 @media (max-width:900px){ .laser-root { height: 360px; } .overlay-box { width: 96%; } }
 
