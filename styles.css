@@ -98,13 +98,14 @@ section {
   gap: 1rem;
 }
 .site-title {
-  color: #b2f9ff;
-  filter: drop-shadow(3px 3px 2px #a3b1c6) drop-shadow(-3px -3px 2px #ffffff);
+  color: #dff7ff;
+  text-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.4);
   margin: 0;
   font-size: 2.4rem;
 }
 .subtitle {
-  color: #556;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
   margin-top: 0.25rem;
 }
 
