@@ -2457,7 +2457,14 @@ const section = document.querySelector("section");
 const iconColorSelect = document.getElementById("iconColorSelect");
 const sizeSlider = document.getElementById("sizeSlider");
 
-// Ensure slider max is reasonable for viewport and frame
+// Respect the original slider max from markup (so hard-coded max stays honored)
+const ORIGINAL_SLIDER_MAX = (() => {
+  const raw = sizeSlider.getAttribute('max');
+  const n = parseInt(raw, 10);
+  return Number.isFinite(n) ? n : 220;
+})();
+
+// Ensure slider max is reasonable for viewport and frame but never exceed ORIGINAL_SLIDER_MAX
 function updateSliderMax() {
   const MIN_SIZE = 24;
   const fallbackFrame = 120;
@@ -2466,8 +2473,10 @@ function updateSliderMax() {
   // Allow icons up to ~1.6x frame height but never larger than 60% of viewport height nor 220px
   const maxByFrame = Math.floor(frameHeight * 1.6);
   const maxByViewport = Math.floor(window.innerHeight * 0.6);
-  const globalMax = Math.min(maxByFrame, maxByViewport, 220);
-  sizeSlider.max = Math.max(globalMax, MIN_SIZE);
+  const computedMax = Math.min(maxByFrame, maxByViewport, 220);
+  // Final max should not exceed the original hard-coded max
+  const finalMax = Math.max(MIN_SIZE, Math.min(computedMax, ORIGINAL_SLIDER_MAX));
+  sizeSlider.max = finalMax;
   // clamp current value
   if (parseInt(sizeSlider.value, 10) > sizeSlider.max) sizeSlider.value = sizeSlider.max;
 }
