@@ -139,7 +139,14 @@ section {
 .overlay-footer { margin-top:0.5rem; text-align:right; color:#eee; }
 
 /* ensure header sits under hero unless explicitly above */
-.site-header { position: relative; z-index: 0; }
+.site-header { position: relative; z-index: 1; /* sit under the laser hero */
+  /* pull header up into hero area so laser appears to lance the top */
+  margin-top: -96px;
+  padding-top: 56px; /* preserve internal spacing */
+}
+
+/* push main content down so it doesn't hide under the pulled-up header */
+.main-content { margin-top: 96px; }
 
 @media (max-width:900px){ .laser-root { height: 360px; } .overlay-box { width: 96%; } }
 
