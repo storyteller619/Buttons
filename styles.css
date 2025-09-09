@@ -171,16 +171,17 @@ section {
   justify-content: center;
   background: transparent;
   border-radius: 6px;
-  overflow: hidden;
+  overflow: visible; /* allow tall glyphs to render without being clipped */
   flex: 0 0 auto;
   box-sizing: border-box;
 }
 .icon-frame .material-icons {
-  display: block;
+  display: inline-block;
   line-height: 1;
   transform: translateY(1px); /* optical centering */
   max-width: 100%;
   max-height: 100%;
+  vertical-align: middle;
 }
 .icon-name {
   font-size: 0.75rem;
