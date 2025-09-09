@@ -29,28 +29,40 @@
     </div>
   </header>
 
-  <section class="hero-install">
-    <div class="hero-inner">
-      <div class="hero-left">
-        <h2>Get started — install</h2>
-        <pre class="code-block" tabindex="0">npm install poison-icons</pre>
-        <div class="hero-sub">or</div>
-        <pre class="code-block" tabindex="0">yarn add poison-icons</pre>
-        <div class="run-instructions">
-          <strong>Run the showcase locally</strong>
-          <ol>
-            <li>npm install</li>
-            <li>npm start</li>
-            <li>Open http://localhost:3000/</li>
-          </ol>
+  <section class="laser-hero">
+    <div class="laser-root" id="laser-root"></div>
+
+    <div class="hero-overlay">
+      <div class="overlay-box">
+        <header class="overlay-header">
+          <h2>Poison Icons Showcase</h2>
+          <div class="overlay-controls">
+            <button id="openUsageBtn" class="open-usage">Usage</button>
+            <label class="overlay-label">Icon Color
+              <select id="iconColorSelectTop" class="control-select">
+                <option value="#ECEEF1">Soft White</option>
+                <option value="#B7C8DA">Soft Blue</option>
+                <option value="#f0d9c4">Pale Peach</option>
+                <option value="#c4c1e0">Muted Lavender</option>
+                <option value="#b8d5c0">Misty Green</option>
+                <option value="#f2c6c2">Powder Pink</option>
+                <option value="#e9e2d0">Light Sand</option>
+                <option value="#d2e6d1">Soft Mint</option>
+                <option value="#d8d8d8">Warm Gray</option>
+                <option value="#f1b7a3">Soft Coral</option>
+                <option value="#c2d9f0">Baby Blue</option>
+              </select>
+            </label>
+          </div>
+        </header>
+
+        <div class="overlay-body">
+          <section class="gallery" aria-live="polite"></section>
         </div>
-      </div>
 
-      <div class="hero-right">
-        <h3>Quick usage</h3>
-        <pre class="code-block" tabindex="0">import { IconButton, IconGallery } from "poison-icons";
-
-// &lt;IconButton icon="favorite" color="#f1b7a3" size={80} /&gt;</pre>
+        <footer class="overlay-footer">
+          <div class="install-inline">npm install poison-icons</div>
+        </footer>
       </div>
     </div>
   </section>
