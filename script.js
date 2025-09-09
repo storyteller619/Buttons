@@ -2460,26 +2460,65 @@ const sizeSlider = document.getElementById("sizeSlider");
 // Render icons
 function renderIcons() {
   section.innerHTML = "";
+  const BOX_SIZE = 100; // max size inside the bounding box (px)
+  const requested = parseInt(sizeSlider.value, 10) || BOX_SIZE;
+
   i_list.forEach((iconName) => {
     const card = document.createElement("div");
     card.className = "icon-card";
+
+    const frame = document.createElement("div");
+    frame.className = "icon-frame";
 
     const span = document.createElement("span");
     span.className = "material-icons";
     span.textContent = iconName;
     span.style.color = iconColorSelect.value;
-    span.style.fontSize = `${sizeSlider.value}px`;
+
+    // Ensure the icon always fits inside the bounding box
+    const effectiveSize = Math.min(requested, BOX_SIZE);
+    span.style.fontSize = `${effectiveSize}px`;
 
     span.addEventListener("click", () => {
       span.classList.toggle("pressed");
     });
 
+    frame.appendChild(span);
+
+    const labelRow = document.createElement("div");
+    labelRow.className = "label-row";
+
     const label = document.createElement("div");
     label.className = "icon-name";
     label.textContent = iconName;
 
-    card.appendChild(span);
-    card.appendChild(label);
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "copy-btn";
+    copyBtn.type = "button";
+    copyBtn.textContent = "Copy";
+    copyBtn.setAttribute("aria-label", `Copy ${iconName}`);
+
+    copyBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+      try {
+        await navigator.clipboard.writeText(iconName);
+        copyBtn.textContent = "Copied!";
+        copyBtn.classList.add("copied");
+        setTimeout(() => {
+          copyBtn.textContent = "Copy";
+          copyBtn.classList.remove("copied");
+        }, 1200);
+      } catch (err) {
+        copyBtn.textContent = "Err";
+        setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+      }
+    });
+
+    labelRow.appendChild(label);
+    labelRow.appendChild(copyBtn);
+
+    card.appendChild(frame);
+    card.appendChild(labelRow);
 
     section.appendChild(card);
   });
