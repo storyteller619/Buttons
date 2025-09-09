@@ -2488,6 +2488,22 @@ let lockedMaxValue = null;
 window.addEventListener('resize', updateSliderMax);
 updateSliderMax();
 
+// Sync the top color select with the sidebar one if both exist
+const sidebarColor = document.getElementById('iconColorSelect');
+if (iconColorSelect && sidebarColor && iconColorSelect !== sidebarColor) {
+  iconColorSelect.addEventListener('change', (e) => { sidebarColor.value = iconColorSelect.value; renderIcons(); });
+  sidebarColor.addEventListener('change', (e) => { iconColorSelect.value = sidebarColor.value; renderIcons(); });
+}
+
+// Open usage panel button
+const openUsageBtn = document.getElementById('openUsageBtn');
+if (openUsageBtn) {
+  openUsageBtn.addEventListener('click', () => {
+    const usage = document.querySelector('.usage-section');
+    if (usage) usage.scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
 // Lock/Unlock button
 const lockBtn = document.getElementById('lockMaxBtn');
 if (lockBtn) {
