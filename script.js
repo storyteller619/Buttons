@@ -2472,8 +2472,35 @@ function updateSliderMax() {
   if (parseInt(sizeSlider.value, 10) > sizeSlider.max) sizeSlider.value = sizeSlider.max;
 }
 
+let lockedMax = false;
+let lockedMaxValue = null;
+
 window.addEventListener('resize', updateSliderMax);
 updateSliderMax();
+
+// Lock/Unlock button
+const lockBtn = document.getElementById('lockMaxBtn');
+if (lockBtn) {
+  lockBtn.addEventListener('click', () => {
+    if (!lockedMax) {
+      // lock current slider value as max
+      lockedMaxValue = parseInt(sizeSlider.value, 10) || parseInt(sizeSlider.max, 10);
+      sizeSlider.max = lockedMaxValue;
+      lockBtn.classList.add('locked');
+      lockBtn.textContent = 'Max locked';
+      lockBtn.setAttribute('aria-pressed', 'true');
+      lockedMax = true;
+    } else {
+      // unlock and restore dynamic max
+      lockedMax = false;
+      lockedMaxValue = null;
+      updateSliderMax();
+      lockBtn.classList.remove('locked');
+      lockBtn.textContent = 'Lock max';
+      lockBtn.setAttribute('aria-pressed', 'false');
+    }
+  });
+}
 
 // Render icons
 function renderIcons() {
