@@ -2453,8 +2453,9 @@ let i_list = [
 ];
 
 // DOM elements
-const section = document.querySelector("section");
-const iconColorSelect = document.getElementById("iconColorSelect");
+const section = document.querySelector(".gallery");
+// there are two color selects (top and sidebar); prefer top if present
+const iconColorSelect = document.getElementById("iconColorSelectTop") || document.getElementById("iconColorSelect");
 const sizeSlider = document.getElementById("sizeSlider");
 
 // Respect the original slider max from markup (so hard-coded max stays honored)
