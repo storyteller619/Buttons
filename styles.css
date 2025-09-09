@@ -1,0 +1,89 @@
+body {
+  background: #e0e5ec; /* fixed neumorphic background */
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  text-align: center;
+  color: #b2f9ff;
+  filter: drop-shadow(3px 3px 2px #a3b1c6) drop-shadow(-3px -3px 2px #ffffff);
+  margin-top: 5rem;
+  font-size: 10rem; /* explicit size */
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin: 5rem;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  font-weight: bold;
+  margin-right: 0.6rem;
+}
+
+.material-icons {
+  font-size: 3.5rem; /* default size, overridden by JS slider */
+  color: #a3b1c6;
+  filter: drop-shadow(3px 3px 2px #a3b1c6) drop-shadow(-3px -3px 2px #ffffff);
+  margin: 1rem;
+  transition: all 0.1s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Hover glow effect */
+.material-icons:hover {
+  filter: drop-shadow(4px 4px 4px #a3b1c6) drop-shadow(-4px -4px 4px #ffffff);
+}
+
+/* Pressed effect while holding (CSS only) */
+.material-icons:active {
+  filter: drop-shadow(-3px -3px 1px #a3b1c6) drop-shadow(3px 3px 1px #ffffff);
+  transform: translateY(2px); /* subtle press animation */
+}
+
+/* Pressed effect that sticks (requires JS) */
+.material-icons.pressed {
+  filter: drop-shadow(-3px -3px 1px #a3b1c6) drop-shadow(3px 3px 1px #ffffff);
+  transform: translateY(2px);
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+/* Neumorphic style dropdown for icon color selection */
+.controls select#iconColorSelect {
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  border: none;
+  background: #e0e5ec;
+  box-shadow: 6px 6px 10px #a3b1c6, -6px -6px 10px #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+  color: #5a5a5a;
+  transition: all 0.2s ease;
+}
+
+.controls select#iconColorSelect:hover {
+  box-shadow: 4px 4px 8px #a3b1c6, -4px -4px 8px #ffffff;
+  transform: scale(1.05);
+}
+
+.controls select#iconColorSelect:focus {
+  outline: none;
+  box-shadow: inset 2px 2px 5px #a3b1c6, inset -2px -2px 5px #ffffff;
+}
+
+/* Size slider styling */
+.controls input[type="range"] {
+  cursor: pointer;
+}
