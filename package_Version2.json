@@ -1,0 +1,31 @@
+{
+  "name": "poison",
+  "version": "1.0.0",
+  "description": "A neumorphic Material-Icons button builder for React + TypeScript.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storyteller619/Buttons"
+  },
+  "keywords": [
+    "react",
+    "icons",
+    "material-icons",
+    "button",
+    "neumorphic",
+    "typescript",
+    "poison"
+  ],
+  "author": "storyteller619",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0"
+  }
+}
