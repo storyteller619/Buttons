@@ -156,6 +156,8 @@ section {
   width: 140px;
   margin: 0.5rem;
   box-sizing: border-box;
+  padding: 6px 4px; /* keep spacing so label can't collide with frame */
+  background: transparent;
 }
 .icon-frame {
   width: 100px;
@@ -168,6 +170,12 @@ section {
   border: 1px solid rgba(0,0,0,0.06);
   overflow: hidden;
   flex: 0 0 auto;
+  box-sizing: border-box;
+}
+.icon-frame .material-icons {
+  display: block;
+  line-height: 1;
+  transform: translateY(1px); /* optical centering */
 }
 .icon-name {
   font-size: 0.75rem;
@@ -177,7 +185,7 @@ section {
   max-width: 110px;
   word-break: break-word;
   white-space: normal;
-  line-height: 1.1;
+  line-height: 1.15;
 }
 .label-row {
   display: flex;
@@ -185,13 +193,13 @@ section {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-top: 0.35rem;
+  margin-top: 0.5rem;
   padding: 0 6px;
 }
 .copy-btn {
   background: #f5f7fa;
   border: 1px solid rgba(0,0,0,0.06);
-  padding: 0.2rem 0.45rem;
+  padding: 0.22rem 0.45rem;
   border-radius: 6px;
   font-size: 0.7rem;
   cursor: pointer;
