@@ -1,5 +1,5 @@
 {
-  "name": "poison",
+  "name": "poison-icons",
   "version": "1.0.0",
   "description": "A neumorphic Material-Icons button builder for React + TypeScript.",
   "main": "dist/index.js",
