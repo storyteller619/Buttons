@@ -131,6 +131,23 @@ section {
 .run-instructions { margin-top:0.5rem; }
 .site-footer { text-align:center; padding:1.5rem 0; color:#666; }
 
+/* Icon card and label */
+.icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  margin: 0.5rem;
+}
+.icon-name {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.35rem;
+  text-align: center;
+  max-width: 110px;
+  word-break: break-word;
+}
+
 /* Responsive: keep original breakpoints if any (none exist) */
 @media (max-width: 900px) {
   .main-content { grid-template-columns: 1fr; padding:1rem; }
