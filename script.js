@@ -2460,8 +2460,8 @@ const sizeSlider = document.getElementById("sizeSlider");
 // Render icons
 function renderIcons() {
   section.innerHTML = "";
-  const BOX_SIZE = 100; // max size inside the bounding box (px)
-  const requested = parseInt(sizeSlider.value, 10) || BOX_SIZE;
+  const BOX_SIZE = 110; // max size inside the bounding box (px) — slightly smaller than frame height
+  const requested = Math.max(24, parseInt(sizeSlider.value, 10) || BOX_SIZE);
 
   i_list.forEach((iconName) => {
     const card = document.createElement("div");
