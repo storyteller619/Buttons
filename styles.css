@@ -137,6 +137,20 @@ section {
 .control-label { font-weight:700; }
 .control-select { padding:0.5rem 0.75rem; border-radius:8px; border:none; background:inherit; box-shadow:none; }
 .control-range { width:100%; }
+.lock-btn {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: linear-gradient(180deg,#f7f7f7,#ededed);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.lock-btn.locked {
+  background: linear-gradient(180deg,#ffd1a8,#ffb366);
+  color: #222;
+  border-color: rgba(0,0,0,0.08);
+}
 .example-buttons { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.5rem; }
 .demo-icon { font-size: 36px; color: #a3b1c6; filter: drop-shadow(3px 3px 2px #a3b1c6) drop-shadow(-3px -3px 2px #ffffff); padding:0.25rem; border-radius:8px; }
 
