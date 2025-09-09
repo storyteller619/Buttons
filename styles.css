@@ -157,9 +157,9 @@ section {
   margin: 0.5rem;
   box-sizing: border-box;
   padding: 10px 8px;
-  background: #ffffff;
+  background: transparent; /* preserve page background so icons keep neumorphic look */
   border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
   min-height: 170px; /* ensures room for icon + label + button */
   justify-content: space-between;
 }
@@ -202,8 +202,8 @@ section {
   padding: 0 6px;
 }
 .copy-btn {
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,0,0,0.06);
   padding: 0.18rem 0.45rem;
   border-radius: 6px;
   font-size: 0.72rem;
