@@ -2461,6 +2461,9 @@ const sizeSlider = document.getElementById("sizeSlider");
 function renderIcons() {
   section.innerHTML = "";
   i_list.forEach((iconName) => {
+    const card = document.createElement("div");
+    card.className = "icon-card";
+
     const span = document.createElement("span");
     span.className = "material-icons";
     span.textContent = iconName;
@@ -2471,7 +2474,14 @@ function renderIcons() {
       span.classList.toggle("pressed");
     });
 
-    section.appendChild(span);
+    const label = document.createElement("div");
+    label.className = "icon-name";
+    label.textContent = iconName;
+
+    card.appendChild(span);
+    card.appendChild(label);
+
+    section.appendChild(card);
   });
 }
 
