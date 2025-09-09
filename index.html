@@ -66,18 +66,18 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#ECEEF1", padding: 32, boxSizing: "border-box" }}>
-      <h1>Poison Icons Demo</h1>
-      <IconButton icon="favorite" color="#f1b7a3" size={80} />
+    &lt;div style={{ minHeight: "100vh", background: "#ECEEF1", padding: 32, boxSizing: "border-box" }}&gt;
+      &lt;h1&gt;Poison Icons Demo&lt;/h1&gt;
+      &lt;IconButton icon="favorite" color="#f1b7a3" size={80} /&gt;
 
-      <IconGallery
+      &lt;IconGallery
         color="#ECEEF1"
         size={64}
-        onIconClick={(icon, idx) => handleIconClick(icon, idx)}
+        onIconClick={(icon, idx) =&gt; handleIconClick(icon, idx)}
         pressedIcons={pressedIcons}
         showNames={true}
-      />
-    </div>
+      /&gt;
+    &lt;/div&gt;
   );
 }
 </pre>
