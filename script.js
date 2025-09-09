@@ -2500,17 +2500,47 @@ function renderIcons() {
 
     copyBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
-      try {
-        await navigator.clipboard.writeText(iconName);
-        copyBtn.textContent = "Copied!";
-        copyBtn.classList.add("copied");
+
+      const showTemp = (text, cls) => {
+        copyBtn.textContent = text;
+        if (cls) copyBtn.classList.add(cls);
         setTimeout(() => {
           copyBtn.textContent = "Copy";
-          copyBtn.classList.remove("copied");
+          if (cls) copyBtn.classList.remove(cls);
         }, 1200);
+      };
+
+      const fallbackCopy = (text) => {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          // Avoid scrolling to bottom
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return ok;
+        } catch (err) {
+          return false;
+        }
+      };
+
+      try {
+        if (navigator && navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          await navigator.clipboard.writeText(iconName);
+          showTemp("Copied!", "copied");
+        } else {
+          const ok = fallbackCopy(iconName);
+          if (ok) showTemp("Copied!", "copied");
+          else showTemp("Err");
+        }
       } catch (err) {
-        copyBtn.textContent = "Err";
-        setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+        // Last-resort fallback
+        const ok = fallbackCopy(iconName);
+        if (ok) showTemp("Copied!", "copied");
+        else showTemp("Err");
       }
     });
 
