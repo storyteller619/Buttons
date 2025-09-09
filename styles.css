@@ -203,15 +203,17 @@ section {
   padding: 0 6px;
 }
 .copy-btn {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(0,0,0,0.06);
-  padding: 0.18rem 0.45rem;
+  background: linear-gradient(180deg, #ffb366, #ff8c1a); /* orange gradient */
+  color: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 0.22rem 0.6rem;
   border-radius: 6px;
   font-size: 0.72rem;
   cursor: pointer;
-  box-shadow: none;
+  box-shadow: 0 2px 6px rgba(255,140,26,0.2);
 }
-.copy-btn.copied { background: #b8f1d0; border-color: rgba(0,0,0,0.06); }
+.copy-btn:hover { transform: translateY(-1px); }
+.copy-btn.copied { background: linear-gradient(180deg, #ffd6b3, #ffb366); border-color: rgba(0,0,0,0.06); color:#222; }
 
 /* Responsive: keep original breakpoints if any (none exist) */
 @media (max-width: 900px) {
