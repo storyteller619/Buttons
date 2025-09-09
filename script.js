@@ -2460,8 +2460,8 @@ const sizeSlider = document.getElementById("sizeSlider");
 // Render icons
 function renderIcons() {
   section.innerHTML = "";
-  const BOX_SIZE = 110; // max size inside the bounding box (px) — slightly smaller than frame height
-  const requested = Math.max(24, parseInt(sizeSlider.value, 10) || BOX_SIZE);
+  const MIN_SIZE = 24;
+  const requested = Math.max(MIN_SIZE, parseInt(sizeSlider.value, 10) || MIN_SIZE);
 
   i_list.forEach((iconName) => {
     const card = document.createElement("div");
@@ -2475,9 +2475,8 @@ function renderIcons() {
     span.textContent = iconName;
     span.style.color = iconColorSelect.value;
 
-    // Ensure the icon always fits inside the bounding box
-    const effectiveSize = Math.min(requested, BOX_SIZE);
-    span.style.fontSize = `${effectiveSize}px`;
+    // Use full slider range for icon font size (no artificial cap)
+    span.style.fontSize = `${requested}px`;
 
     span.addEventListener("click", () => {
       span.classList.toggle("pressed");
