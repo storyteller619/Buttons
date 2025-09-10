@@ -1,40 +1,169 @@
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BUTTONS</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Poison Icons — Showcase</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+  <section class="laser-hero">
+    <div class="laser-root" id="laser-root"></div>
 
-  <h1 class="title">BUTTONS</h1>
+    <div class="hero-overlay">
+      <div class="overlay-box">
+        <div class="overlay-topline" aria-hidden="true">
+          <div class="topline"></div>
+          <div class="topline-spike"></div>
+        </div>
+        <header class="overlay-header">
+          <div class="overlay-title">
+            <h2>Poison Icons Showcase</h2>
+            <p class="subtitle">A neumorphic Material-Icons button builder — interactive preview and usage examples</p>
+          </div>
 
-  <div class="controls">
-    <label for="iconColorSelect">Icon Color:</label>
-    <select id="iconColorSelect">
-      <option value="#ECEEF1">Soft White</option> <!-- classic white -->
-      <option value="#B7C8DA">Soft Blue</option>
-      <option value="#f0d9c4">Pale Peach</option>
-      <option value="#c4c1e0">Muted Lavender</option>
-      <option value="#b8d5c0">Misty Green</option>
-      <option value="#f2c6c2">Powder Pink</option>
-      <option value="#e9e2d0">Light Sand</option>
-      <option value="#d2e6d1">Soft Mint</option>
-      <option value="#d8d8d8">Warm Gray</option>
-      <option value="#f1b7a3">Soft Coral</option>
-      <option value="#c2d9f0">Baby Blue</option>
-    </select>
+          <div class="overlay-controls">
+            <button id="openUsageBtn" class="open-usage">Usage</button>
+            <label class="overlay-label">Icon Color
+              <select id="iconColorSelectTop" class="control-select">
+                <option value="#ECEEF1">Soft White</option>
+                <option value="#B7C8DA">Soft Blue</option>
+                <option value="#f0d9c4">Pale Peach</option>
+                <option value="#c4c1e0">Muted Lavender</option>
+                <option value="#b8d5c0">Misty Green</option>
+                <option value="#f2c6c2">Powder Pink</option>
+                <option value="#e9e2d0">Light Sand</option>
+                <option value="#d2e6d1">Soft Mint</option>
+                <option value="#d8d8d8">Warm Gray</option>
+                <option value="#f1b7a3">Soft Coral</option>
+                <option value="#c2d9f0">Baby Blue</option>
+              </select>
+            </label>
+          </div>
 
-    <label for="sizeSlider">Icon Size:</label>
-    <input type="range" id="sizeSlider" min="24" max="300" value="300">
-  </div>
+          <div class="install-panel">
+            <div class="install-block">
+              <div class="install-title">Install</div>
+              <pre class="code-block" tabindex="0">npm install poison-icons</pre>
+              <div class="install-sub">or with yarn</div>
+              <pre class="code-block" tabindex="0">yarn add poison-icons</pre>
+            </div>
 
-  <section></section>
+            <div class="usage-block">
+              <div class="install-title">Quick usage</div>
+              <pre class="code-block" tabindex="0">import { IconButton, IconGallery } from "poison-icons";
 
+// &lt;IconButton icon="favorite" color="#f1b7a3" size={80} /&gt;</pre>
+            </div>
+          </div>
+        </header>
+
+        <div class="overlay-body">
+          <!-- hero decorative content only - no icons here -->
+          <div class="hero-blurb">Explore the icons below — pick a color and size.</div>
+        </div>
+
+        <footer class="overlay-footer">
+          <div class="install-inline">npm install poison-icons</div>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+
+  <main class="main-content">
+    <aside class="controls-panel">
+      <div class="control-row">
+        <label for="iconColorSelect" class="control-label">Icon Color</label>
+        <select id="iconColorSelect" class="control-select">
+          <option value="#ECEEF1">Soft White</option>
+          <option value="#B7C8DA">Soft Blue</option>
+          <option value="#f0d9c4">Pale Peach</option>
+          <option value="#c4c1e0">Muted Lavender</option>
+          <option value="#b8d5c0">Misty Green</option>
+          <option value="#f2c6c2">Powder Pink</option>
+          <option value="#e9e2d0">Light Sand</option>
+          <option value="#d2e6d1">Soft Mint</option>
+          <option value="#d8d8d8">Warm Gray</option>
+          <option value="#f1b7a3">Soft Coral</option>
+          <option value="#c2d9f0">Baby Blue</option>
+        </select>
+      </div>
+
+      <div class="control-row">
+        <label for="sizeSlider" class="control-label">Icon Size</label>
+        <input type="range" id="sizeSlider" min="24" max="100" value="100" class="control-range">
+        <button id="lockMaxBtn" class="lock-btn" type="button" aria-pressed="false">Lock max</button>
+      </div>
+
+    </aside>
+
+    <section class="gallery" aria-live="polite"></section>
+
+    <section class="usage-section">
+      <h2 class="usage-title">How to use (React + TypeScript)</h2>
+
+      <div class="usage-panel">
+        <pre class="code-block" tabindex="0">// App.tsx
+import React, { useState } from "react";
+import { IconButton, IconGallery, ICONS } from "poison-icons";
+
+export default function App() {
+  const [pressedIcons, setPressedIcons] = useState(Array(ICONS.length).fill(false));
+
+  const handleIconClick = (_icon: string, idx: number) => {
+    setPressedIcons(prev => prev.map((pressed, i) => (i === idx ? !pressed : pressed)));
+  };
+
+  return (
+    &lt;div style={{ minHeight: "100vh", background: "#ECEEF1", padding: 32, boxSizing: "border-box" }}&gt;
+      &lt;h1&gt;Poison Icons Demo&lt;/h1&gt;
+      &lt;IconButton icon="favorite" color="#f1b7a3" size={80} /&gt;
+
+      &lt;IconGallery
+        color="#ECEEF1"
+        size={64}
+        onIconClick={(icon, idx) =&gt; handleIconClick(icon, idx)}
+        pressedIcons={pressedIcons}
+        showNames={true}
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+</pre>
+      </div>
+
+      <h3 class="usage-subtitle">Quick HTML demo (no bundler)</h3>
+      <div class="usage-panel">
+        <pre class="code-block" tabindex="0">&lt;!-- index.html --&gt;
+&lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"&gt;
+&lt;span class="material-icons"&gt;favorite&lt;/span&gt;
+&lt;span class="material-icons"&gt;home&lt;/span&gt;
+&lt;span class="material-icons"&gt;settings&lt;/span&gt;
+</pre>
+      </div>
+
+      <div class="run-instructions">
+        <strong>Install the library in your project</strong>
+        <pre class="code-block" tabindex="0">npm install poison-icons</pre>
+
+        <strong>Run the showcase locally</strong>
+        <ol>
+          <li>npm install</li>
+          <li>npm start</li>
+          <li>Open http://localhost:3000/</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">Built with ♥ — poison-icons</footer>
+
+  <!-- three.js and LaserFlow hero -->
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+  <script src="laserFlow.js"></script>
   <script src="script.js"></script>
-</body>
 
+</body>
 </html>

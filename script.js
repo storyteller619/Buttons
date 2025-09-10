@@ -2453,25 +2453,176 @@ let i_list = [
 ];
 
 // DOM elements
-const section = document.querySelector("section");
-const iconColorSelect = document.getElementById("iconColorSelect");
+const section = document.querySelector(".gallery");
+// there are two color selects (top and sidebar); prefer top if present
+const iconColorSelect = document.getElementById("iconColorSelectTop") || document.getElementById("iconColorSelect");
 const sizeSlider = document.getElementById("sizeSlider");
+
+// Respect the original slider max from markup (so hard-coded max stays honored)
+const ORIGINAL_SLIDER_MAX = (() => {
+  const raw = sizeSlider.getAttribute('max');
+  const n = parseInt(raw, 10);
+  return Number.isFinite(n) ? n : 220;
+})();
+
+// Ensure slider max is reasonable for viewport and frame but never exceed ORIGINAL_SLIDER_MAX
+function updateSliderMax() {
+  const MIN_SIZE = 24;
+  const fallbackFrame = 120;
+  const frameEl = document.querySelector('.icon-frame');
+  const frameHeight = frameEl ? parseInt(getComputedStyle(frameEl).height, 10) || fallbackFrame : fallbackFrame;
+  // Allow icons up to ~1.6x frame height but never larger than 60% of viewport height nor 220px
+  const maxByFrame = Math.floor(frameHeight * 1.6);
+  const maxByViewport = Math.floor(window.innerHeight * 0.6);
+  const computedMax = Math.min(maxByFrame, maxByViewport, 220);
+  // Final max should not exceed the original hard-coded max
+  const finalMax = Math.max(MIN_SIZE, Math.min(computedMax, ORIGINAL_SLIDER_MAX));
+  sizeSlider.max = finalMax;
+  // clamp current value
+  if (parseInt(sizeSlider.value, 10) > sizeSlider.max) sizeSlider.value = sizeSlider.max;
+}
+
+let lockedMax = false;
+let lockedMaxValue = null;
+
+window.addEventListener('resize', updateSliderMax);
+updateSliderMax();
+
+// Sync the top color select with the sidebar one if both exist
+const sidebarColor = document.getElementById('iconColorSelect');
+if (iconColorSelect && sidebarColor && iconColorSelect !== sidebarColor) {
+  iconColorSelect.addEventListener('change', (e) => { sidebarColor.value = iconColorSelect.value; renderIcons(); });
+  sidebarColor.addEventListener('change', (e) => { iconColorSelect.value = sidebarColor.value; renderIcons(); });
+}
+
+// Open usage panel button
+const openUsageBtn = document.getElementById('openUsageBtn');
+if (openUsageBtn) {
+  openUsageBtn.addEventListener('click', () => {
+    const usage = document.querySelector('.usage-section');
+    if (usage) usage.scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+// Lock/Unlock button
+const lockBtn = document.getElementById('lockMaxBtn');
+if (lockBtn) {
+  lockBtn.addEventListener('click', () => {
+    if (!lockedMax) {
+      // lock current slider value as max
+      lockedMaxValue = parseInt(sizeSlider.value, 10) || parseInt(sizeSlider.max, 10);
+      sizeSlider.max = lockedMaxValue;
+      lockBtn.classList.add('locked');
+      lockBtn.textContent = 'Max locked';
+      lockBtn.setAttribute('aria-pressed', 'true');
+      lockedMax = true;
+    } else {
+      // unlock and restore dynamic max
+      lockedMax = false;
+      lockedMaxValue = null;
+      updateSliderMax();
+      lockBtn.classList.remove('locked');
+      lockBtn.textContent = 'Lock max';
+      lockBtn.setAttribute('aria-pressed', 'false');
+    }
+  });
+}
 
 // Render icons
 function renderIcons() {
   section.innerHTML = "";
+  const MIN_SIZE = 24;
+  const MAX_SIZE = parseInt(sizeSlider.max, 10) || 220;
+  let requested = parseInt(sizeSlider.value, 10) || MIN_SIZE;
+  requested = Math.max(MIN_SIZE, Math.min(requested, MAX_SIZE));
+
   i_list.forEach((iconName) => {
+    const card = document.createElement("div");
+    card.className = "icon-card";
+
+    const frame = document.createElement("div");
+    frame.className = "icon-frame";
+
     const span = document.createElement("span");
     span.className = "material-icons";
     span.textContent = iconName;
     span.style.color = iconColorSelect.value;
-    span.style.fontSize = `${sizeSlider.value}px`;
+
+    // Use full slider range for icon font size (no artificial cap)
+    span.style.fontSize = `${requested}px`;
 
     span.addEventListener("click", () => {
       span.classList.toggle("pressed");
     });
 
-    section.appendChild(span);
+    frame.appendChild(span);
+
+    const labelRow = document.createElement("div");
+    labelRow.className = "label-row";
+
+    const label = document.createElement("div");
+    label.className = "icon-name";
+    label.textContent = iconName;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "copy-btn";
+    copyBtn.type = "button";
+    copyBtn.textContent = "Copy";
+    copyBtn.setAttribute("aria-label", `Copy ${iconName}`);
+
+    copyBtn.addEventListener("click", async (e) => {
+      e.stopPropagation();
+
+      const showTemp = (text, cls) => {
+        copyBtn.textContent = text;
+        if (cls) copyBtn.classList.add(cls);
+        setTimeout(() => {
+          copyBtn.textContent = "Copy";
+          if (cls) copyBtn.classList.remove(cls);
+        }, 1200);
+      };
+
+      const fallbackCopy = (text) => {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          // Avoid scrolling to bottom
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return ok;
+        } catch (err) {
+          return false;
+        }
+      };
+
+      try {
+        if (navigator && navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+          await navigator.clipboard.writeText(iconName);
+          showTemp("Copied!", "copied");
+        } else {
+          const ok = fallbackCopy(iconName);
+          if (ok) showTemp("Copied!", "copied");
+          else showTemp("Err");
+        }
+      } catch (err) {
+        // Last-resort fallback
+        const ok = fallbackCopy(iconName);
+        if (ok) showTemp("Copied!", "copied");
+        else showTemp("Err");
+      }
+    });
+
+    labelRow.appendChild(label);
+    labelRow.appendChild(copyBtn);
+
+    card.appendChild(frame);
+    card.appendChild(labelRow);
+
+    section.appendChild(card);
   });
 }
 
