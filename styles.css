@@ -146,11 +146,6 @@ section {
 .install-block, .usage-block { background: transparent; padding:0.6rem; border-radius:8px; }
 .overlay-footer { display:none; }
 
-/* hero separator placed above the gallery (aligns with the user's red line) */
-.hero-separator { position: absolute; left: 6%; right: 6%; top: 220px; height: 8px; background: #000; border-radius: 4px; z-index: 6; box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-
-@media (max-width:900px){ .hero-separator { left: 4%; right: 4%; top: 160px; height: 6px; } }
-@media (max-width:600px){ .hero-separator { left: 3%; right: 3%; top: 120px; height: 5px; } }
 
 /* ensure header sits under hero unless explicitly above */
 
