@@ -146,6 +146,12 @@ section {
 .install-block, .usage-block { background: transparent; padding:0.6rem; border-radius:8px; }
 .overlay-footer { display:none; }
 
+/* hero separator placed above the gallery (aligns with the user's red line) */
+.hero-separator { position: absolute; left: 6%; right: 6%; top: 220px; height: 8px; background: #000; border-radius: 4px; z-index: 6; box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+
+@media (max-width:900px){ .hero-separator { left: 4%; right: 4%; top: 160px; height: 6px; } }
+@media (max-width:600px){ .hero-separator { left: 3%; right: 3%; top: 120px; height: 5px; } }
+
 /* ensure header sits under hero unless explicitly above */
 
 /* push main content down so it doesn't hide under the pulled-up header */
@@ -200,7 +206,7 @@ section {
 .example-buttons { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.5rem; }
 .demo-icon { font-size: 36px; color: #a3b1c6; filter: drop-shadow(3px 3px 2px #a3b1c6) drop-shadow(-3px -3px 2px #ffffff); padding:0.25rem; border-radius:8px; }
 
-.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; justify-items: center; align-items: start; margin-top: 0; padding: 1rem 0 0.75rem; border-top: 6px solid #000; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; justify-items: center; align-items: start; margin-top: 0.5rem; padding: 0.75rem 0; border-top: 2px solid #000; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
 .usage-section { grid-column: 1 / -1; margin-top: 2rem; }
 .usage-title { margin: 0 0 0.5rem; }
 .usage-panel { background:#fff; border-radius:8px; padding:1rem; box-shadow: 4px 4px 8px rgba(0,0,0,0.05); margin-bottom:1rem; }
